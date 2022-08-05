@@ -8,23 +8,13 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { Ref, onErrorCaptured, ref } from 'vue'
 import { RouterView } from 'vue-router'
 
-export default defineComponent({
-  components: {
-    RouterView,
-  },
+const error: Ref<false|Error> = ref(false)
 
-  data () {
-    return {
-      error: null as null|Error,
-    }
-  },
-
-  errorCaptured (error) {
-    this.error = error as Error
-  },
+onErrorCaptured((errorCaptured) => {
+  error.value = errorCaptured
 })
 </script>
