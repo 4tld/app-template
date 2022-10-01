@@ -9,10 +9,10 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, onErrorCaptured, ref } from 'vue'
+import { type Ref, onErrorCaptured, ref } from 'vue'
 import { RouterView } from 'vue-router'
 
-const error: Ref<false|Error> = ref(false)
+const error: Ref<Error|false> = ref(false)
 
 onErrorCaptured((errorCaptured) => {
   error.value = errorCaptured
