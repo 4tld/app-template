@@ -2,6 +2,7 @@ import tsParser from '@typescript-eslint/parser'
 import ts from '@typescript-eslint/eslint-plugin'
 import vue from 'eslint-plugin-vue'
 import vueParser from 'vue-eslint-parser'
+import js from '@eslint/js'
 
 const baseRules = {
   'array-bracket-spacing': [ 1, 'always', { singleValue: false, objectsInArrays: false, arraysInArrays: false }],
@@ -161,7 +162,7 @@ const vueRules = {
   'vue/comma-spacing': 1,
   'vue/comma-style': 1,
   'vue/comment-directive': 0,
-  'vue/component-api-style': 1, // For option api, use : [ 1, ['options']]
+  'vue/component-api-style': [ 1, ['options']], // For composition api, use : 1
   'vue/component-definition-name-casing': 1,
   'vue/component-name-in-template-casing': 1,
   'vue/component-options-name-casing': 1,
@@ -365,10 +366,10 @@ const vueRules = {
 }
 
 export default [
-  'eslint:all',
+  js.configs.all,
   { ignores: ['dist/**/*'] },
-  { files: [ '**/*.js', '**/*.ts', '**/*.vue' ] },
   {
+    files: [ '**/*.js', '**/*.ts', '**/*.vue' ],
     languageOptions: {
       globals: {
         console: 'readonly',
@@ -384,11 +385,15 @@ export default [
     linterOptions: {
       reportUnusedDisableDirectives: true,
     },
-    plugins: { ts, vue },
+    plugins: { vue },
     rules: {
       ...baseRules,
-      ...tsRules,
       ...vueRules,
     },
+  },
+  {
+    files: [ '**/*.ts', '**/*.vue' ],
+    plugins: { ts },
+    rules: tsRules,
   },
 ]

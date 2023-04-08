@@ -13,7 +13,6 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "preserveValueImports": true,
     "removeComments": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
